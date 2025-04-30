@@ -1,0 +1,40 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: wzh-picture-backend
+  # 数据库配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/wzh_picture?
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+mybatis-plus:
+  configuration:
+    # 仅在开发环境打印sql
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 转换驼峰
+    map-underscore-to-camel-case: false
+  global-config:
+    db-config:
+      logic-delete-field: isDeleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+#  knife4j配置
+knife4j:
+  enable: true
+  openapi:
+    title: 接口文档
+    version: 1.0
+    group:
+      default:
+        group-name: 默认分组
+        api-rule: package
+        api-rule-resources:
+          - com.wzh.wzhpictruebackend.controller
