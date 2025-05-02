@@ -1,8 +1,13 @@
 package com.wzh.wzhpictruebackend.service;
 
+import cn.hutool.http.server.HttpServerRequest;
+import com.wzh.wzhpictruebackend.model.dto.LoginUserDTO;
 import com.wzh.wzhpictruebackend.model.dto.RegisterUserDTO;
 import com.wzh.wzhpictruebackend.model.po.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wzh.wzhpictruebackend.model.vo.LoginUserVO;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
 * @author 王志禾
@@ -20,4 +25,7 @@ public interface UserService extends IService<User> {
 
     String userPwdEncrypt(String userPassword);
 
+    LoginUserVO userLogin(LoginUserDTO loginUserDTO, HttpServletRequest request);
+
+    LoginUserVO getLoginUser(User loginUser);
 }
