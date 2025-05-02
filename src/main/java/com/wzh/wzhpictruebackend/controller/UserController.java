@@ -3,13 +3,16 @@ package com.wzh.wzhpictruebackend.controller;
 
 import com.wzh.wzhpictruebackend.common.BaseResponse;
 import com.wzh.wzhpictruebackend.common.ResultUtils;
+import com.wzh.wzhpictruebackend.model.dto.LoginUserDTO;
 import com.wzh.wzhpictruebackend.model.dto.RegisterUserDTO;
+import com.wzh.wzhpictruebackend.model.vo.LoginUserVO;
 import com.wzh.wzhpictruebackend.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/user")
@@ -22,6 +25,12 @@ public class UserController {
     private BaseResponse<Long> userRegister(RegisterUserDTO registerUserDTO){
         Long userId = userService.userRegister(registerUserDTO);
         return ResultUtils.success(userId);
+    }
+
+    @PostMapping("/login")
+    private BaseResponse<LoginUserVO> userLogin(LoginUserDTO loginUserDTO, HttpServletRequest request){
+        LoginUserVO loginUserVO = userService.userLogin(loginUserDTO, request);
+        return ResultUtils.success(loginUserVO);
     }
 
 }
