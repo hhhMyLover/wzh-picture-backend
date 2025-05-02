@@ -14,6 +14,13 @@ public class ResultUtils {
         return new BaseResponse<>(0, data, "ok");
     }
 
+    /**
+     * 成功
+     * @return  响应数据
+     */
+    public static  BaseResponse<Void> success() {
+        return new BaseResponse<>(0, null, "ok");
+    }
 
     /**
      * 错误

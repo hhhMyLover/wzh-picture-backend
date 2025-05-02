@@ -5,8 +5,10 @@ import com.wzh.wzhpictruebackend.common.BaseResponse;
 import com.wzh.wzhpictruebackend.common.ResultUtils;
 import com.wzh.wzhpictruebackend.model.dto.LoginUserDTO;
 import com.wzh.wzhpictruebackend.model.dto.RegisterUserDTO;
+import com.wzh.wzhpictruebackend.model.po.UserPO;
 import com.wzh.wzhpictruebackend.model.vo.LoginUserVO;
 import com.wzh.wzhpictruebackend.service.UserService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,6 +33,18 @@ public class UserController {
     private BaseResponse<LoginUserVO> userLogin(LoginUserDTO loginUserDTO, HttpServletRequest request){
         LoginUserVO loginUserVO = userService.userLogin(loginUserDTO, request);
         return ResultUtils.success(loginUserVO);
+    }
+
+    @PostMapping("/logout")
+    private BaseResponse<Boolean> userLogout( HttpServletRequest request){
+        boolean result = userService.userLogout(request);
+        return ResultUtils.success(result);
+    }
+
+    @GetMapping("/get/loginUser")
+    private BaseResponse<LoginUserVO> getLoinUser( HttpServletRequest request){
+        UserPO userPO = userService.getLoginUser(request);
+        return ResultUtils.success(userService.getLoginUserVO(userPO));
     }
 
 }

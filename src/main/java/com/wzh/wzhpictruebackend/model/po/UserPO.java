@@ -12,7 +12,7 @@ import lombok.Data;
  */
 @TableName(value ="user")
 @Data
-public class User implements Serializable {
+public class UserPO implements Serializable {
 
     private static final long serialVersionUID = -6414429293380291174L;
     /**
