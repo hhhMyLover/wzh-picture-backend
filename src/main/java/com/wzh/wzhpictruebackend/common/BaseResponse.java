@@ -15,6 +15,9 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class BaseResponse<T> implements Serializable {
+
+    private static final long serialVersionUID = -6762825321536759379L;
+
     private int code;
 
     private T data;

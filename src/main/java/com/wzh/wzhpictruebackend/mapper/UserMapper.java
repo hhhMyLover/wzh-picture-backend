@@ -1,6 +1,6 @@
 package com.wzh.wzhpictruebackend.mapper;
 
-import com.wzh.wzhpictruebackend.model.po.User;
+import com.wzh.wzhpictruebackend.model.po.UserPO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2025-05-02 22:43:38
 * @Entity com.wzh.wzhpictruebackend.model.po.User
 */
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper extends BaseMapper<UserPO> {
 
 }
 
