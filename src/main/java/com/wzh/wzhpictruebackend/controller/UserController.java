@@ -1,8 +1,10 @@
 package com.wzh.wzhpictruebackend.controller;
 
 
+import com.wzh.wzhpictruebackend.annotation.AuthCheck;
 import com.wzh.wzhpictruebackend.common.BaseResponse;
 import com.wzh.wzhpictruebackend.common.ResultUtils;
+import com.wzh.wzhpictruebackend.constant.UserConstant;
 import com.wzh.wzhpictruebackend.model.dto.LoginUserDTO;
 import com.wzh.wzhpictruebackend.model.dto.RegisterUserDTO;
 import com.wzh.wzhpictruebackend.model.po.UserPO;
@@ -24,25 +26,26 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    private BaseResponse<Long> userRegister(RegisterUserDTO registerUserDTO){
+    @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
+    public BaseResponse<Long> userRegister(RegisterUserDTO registerUserDTO){
         Long userId = userService.userRegister(registerUserDTO);
         return ResultUtils.success(userId);
     }
 
     @PostMapping("/login")
-    private BaseResponse<LoginUserVO> userLogin(LoginUserDTO loginUserDTO, HttpServletRequest request){
+    public BaseResponse<LoginUserVO> userLogin(LoginUserDTO loginUserDTO, HttpServletRequest request){
         LoginUserVO loginUserVO = userService.userLogin(loginUserDTO, request);
         return ResultUtils.success(loginUserVO);
     }
 
     @PostMapping("/logout")
-    private BaseResponse<Boolean> userLogout( HttpServletRequest request){
+    public BaseResponse<Boolean> userLogout( HttpServletRequest request){
         boolean result = userService.userLogout(request);
         return ResultUtils.success(result);
     }
 
     @GetMapping("/get/loginUser")
-    private BaseResponse<LoginUserVO> getLoinUser( HttpServletRequest request){
+    public BaseResponse<LoginUserVO> getLoinUser( HttpServletRequest request){
         UserPO userPO = userService.getLoginUser(request);
         return ResultUtils.success(userService.getLoginUserVO(userPO));
     }
