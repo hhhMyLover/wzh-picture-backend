@@ -26,7 +26,6 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
     public BaseResponse<Long> userRegister(RegisterUserDTO registerUserDTO){
         Long userId = userService.userRegister(registerUserDTO);
         return ResultUtils.success(userId);
