@@ -1,7 +1,6 @@
 package com.wzh.wzhpictruebackend.controller;
 
 
-import com.wzh.wzhpictruebackend.annotation.AuthCheck;
 import com.wzh.wzhpictruebackend.common.BaseResponse;
 import com.wzh.wzhpictruebackend.common.ResultUtils;
 import com.wzh.wzhpictruebackend.constant.UserConstant;
