@@ -1,0 +1,50 @@
+package com.wzh.picture.controller;
+
+
+import com.wzh.picture.common.BaseResponse;
+import com.wzh.picture.common.ResultUtils;
+import com.wzh.picture.model.dto.LoginUserDTO;
+import com.wzh.picture.model.dto.RegisterUserDTO;
+import com.wzh.picture.model.po.UserPO;
+import com.wzh.picture.model.vo.LoginUserVO;
+import com.wzh.picture.service.UserService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+@RestController
+@RequestMapping("/user")
+public class UserController {
+
+    @Resource
+    private UserService userService;
+
+    @PostMapping("/register")
+    public BaseResponse<Long> userRegister(RegisterUserDTO registerUserDTO){
+        Long userId = userService.userRegister(registerUserDTO);
+        return ResultUtils.success(userId);
+    }
+
+    @PostMapping("/login")
+    public BaseResponse<LoginUserVO> userLogin(LoginUserDTO loginUserDTO, HttpServletRequest request){
+        LoginUserVO loginUserVO = userService.userLogin(loginUserDTO, request);
+        return ResultUtils.success(loginUserVO);
+    }
+
+    @PostMapping("/logout")
+    public BaseResponse<Boolean> userLogout( HttpServletRequest request){
+        boolean result = userService.userLogout(request);
+        return ResultUtils.success(result);
+    }
+
+    @GetMapping("/get/loginUser")
+    public BaseResponse<LoginUserVO> getLoinUser( HttpServletRequest request){
+        UserPO userPO = userService.getLoginUser(request);
+        return ResultUtils.success(userService.getLoginUserVO(userPO));
+    }
+
+}
